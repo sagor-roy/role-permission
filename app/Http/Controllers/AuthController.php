@@ -25,13 +25,13 @@ class AuthController extends Controller
         $credential = $request->only('email', 'password');
         if (Auth::attempt($credential)) {
             if (Auth::user()->role_name == 'customer') {
-                Toastr::success('Login Successfull!!', 'Success',["closeButton" => true,"progressBar"=>true]);
+                Toastr::success('Login Successfull!!');
                 return redirect()->route('profile');
             }
-            Toastr::success('Login Successfull!!', 'Success',["closeButton" => true,"progressBar"=>true]);
+            Toastr::success('Login Successfull!!');
             return redirect()->route('dashboard');
         }
-        Toastr::error('Creadential does\'t match our record', 'Error',["closeButton" => true,"progressBar"=>true]);
+        Toastr::error('Creadential does\'t match our record');
         return redirect()->back();
     }
 
@@ -56,7 +56,7 @@ class AuthController extends Controller
 
         $credential = $request->only('email', 'password');
         if (Auth::attempt($credential)) {
-            Toastr::success('Login Successfull!!', 'Success',["closeButton" => true,"progressBar"=>true]);
+            Toastr::success('Login Successfull!!');
             return redirect()->route('profile');
         }
     }
@@ -64,7 +64,7 @@ class AuthController extends Controller
     public function logout()
     {
         Auth::logout();
-        Toastr::success('Logout Successfull!!', 'Success',["closeButton" => true,"progressBar"=>true]);
+        Toastr::success('Logout Successfull!!');
         return redirect()->route('home');
     }
 }

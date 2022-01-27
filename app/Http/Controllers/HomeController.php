@@ -65,7 +65,7 @@ class HomeController extends Controller
             $input['section'] = '';
         }
         $create->fill($input)->save();
-        Toastr::success('Data created successful',["closeButton" => true,"progressBar"=>true]);
+        Toastr::success('Data created successful');
         return redirect()->back();
     }
 
@@ -93,7 +93,7 @@ class HomeController extends Controller
             'role_name'=>'sub',
             'password'=>Hash::make($request->password),
         ]);
-        Toastr::success('Data created successful',["closeButton" => true,"progressBar"=>true]);
+        Toastr::success('Data created successful');
         return redirect()->back();
     }
 }
