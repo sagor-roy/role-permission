@@ -5,8 +5,15 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/student', [HomeController::class, 'student'])->name('student');
 Route::middleware('isLoggedIn')->group(function () {
     Route::get('/login', [HomeController::class, 'loginIndex'])->name('index.login');
+    Route::get('/auth/google', [AuthController::class, 'redirectToGoogle'])->name('login.google');
+    Route::get('/auth/github', [AuthController::class, 'redirectToGithub'])->name('login.github');
+    Route::get('/auth/facebook', [AuthController::class, 'redirectToFacebook'])->name('login.facebook');
+    Route::get('/callback/github', [AuthController::class, 'handleCallbackGithub']);
+    Route::get('/callback/facebook', [AuthController::class, 'handleCallbackFacebook']);
+    Route::get('/callback/google', [AuthController::class, 'handleCallback']);
     Route::post('/login', [AuthController::class, 'login'])->name('login');
     Route::get('/register', [HomeController::class, 'register'])->name('register');
     Route::post('/register', [AuthController::class, 'store'])->name('register.store');
@@ -31,6 +38,7 @@ Route::middleware('auth')->group(function () {
                 Route::get('staff-manage', [HomeController::class, 'staff'])->name('staff');
                 Route::post('staff-store', [HomeController::class, 'staffStore'])->name('staff-store');
             });
+            Route::get('credential',[HomeController::class,'credentIndex'])->name('credential');
         });
     });
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');

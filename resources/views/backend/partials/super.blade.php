@@ -14,3 +14,7 @@
     <a class="nav-link {{request()->is('admin/role-permission') ? 'active':''}}" href="{{route('admin.role')}}"><i class="fas fa-fw fa-table text-primary"></i>
         <span class="mx-2">Role Permission</span></a>
 </li>
+<li class="nav-item">
+    <a class="nav-link {{request()->is('admin/credential') ? 'active':''}}" href="{{route('admin.credential')}}"><i class="fas fa-fw fa-table text-primary"></i>
+        <span class="mx-2">Creadential</span></a>
+</li>

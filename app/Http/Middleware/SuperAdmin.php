@@ -23,7 +23,7 @@ class SuperAdmin
                 return $next($request);
             }
         }
-        Toastr::error('You don\'t have access to that section');
+        Toastr::error('You don\'t have permission');
         return redirect()->route('dashboard');
     }
 }

@@ -19,7 +19,7 @@ class IsLoggedIn
     public function handle(Request $request, Closure $next)
     {
         if (Auth::check()) {
-            Toastr::error('You are already logged in', 'Opps');
+            Toastr::error('You are already logged in');
             return redirect()->back();
         }
         return $next($request);

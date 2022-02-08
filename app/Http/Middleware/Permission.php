@@ -23,14 +23,14 @@ class Permission
                 return $next($request);
             }
             if(Auth::user()->role_id == 0){
-                Toastr::error('You don\'t have access to that section');
+                Toastr::error('You don\'t have permission');
                 return redirect()->route('dashboard'); 
             }
             if (Auth::user()->sectionCheck($data)){
                 return $next($request);
             }
         }
-        Toastr::error('You don\'t have access to that section');
+        Toastr::error('You don\'t have permission');
         return redirect()->route('dashboard');
     }
 }

@@ -21,7 +21,7 @@ class IsCustomer
         if (Auth::user()->role_name != 'customer') {
             return $next($request);
         }
-        Toastr::error('You have no permission', 'Sorry');
+        Toastr::error('You don\'t have permission');
         return redirect()->back();
     }
 }

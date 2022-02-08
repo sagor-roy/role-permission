@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Creadential;
 use App\Models\Role;
+use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Hash;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class HomeController extends Controller
 {
@@ -28,6 +31,13 @@ class HomeController extends Controller
     {
         return view('backend.dashboard');
     }
+    public function credentIndex()
+    {
+        $facebook=Creadential::find(1);
+        $google=Creadential::find(2);
+        $github=Creadential::find(3);
+        return view('backend.credential',compact('facebook','google','github'));
+    }
     public function profile()
     {
         if (Auth::user()->role_name == 'customer') {
@@ -35,17 +45,21 @@ class HomeController extends Controller
         }
         return redirect()->back();
     }
-    public function about() {
+    public function about()
+    {
         return view('backend.about');
     }
-    public function contact() {
+    public function contact()
+    {
         return view('backend.contact');
     }
-    public function role() {
+    public function role()
+    {
         $data = Role::get();
-        return view('backend.role',compact('data'));
+        return view('backend.role', compact('data'));
     }
-    public function roleStore(Request $request) {
+    public function roleStore(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'name' => 'required'
         ]);
@@ -57,11 +71,9 @@ class HomeController extends Controller
         $create = new Role();
         $input = $request->all();
 
-        if(!empty($request->section))
-        {
-            $input['section'] = implode(" , ",$request->section);
-        }
-        else{
+        if (!empty($request->section)) {
+            $input['section'] = implode(" , ", $request->section);
+        } else {
             $input['section'] = '';
         }
         $create->fill($input)->save();
@@ -69,17 +81,19 @@ class HomeController extends Controller
         return redirect()->back();
     }
 
-    public function staff() {
-        $data = User::where('role_id','!=',0)->with('role')->get();
+    public function staff()
+    {
+        $data = User::where('role_id', '!=', 0)->with('role')->get();
         $role = Role::get();
-        return view('backend.staff',compact('data','role'));
+        return view('backend.staff', compact('data', 'role'));
     }
 
-    public function staffStore(Request $request) {
+    public function staffStore(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'email'=>'required|email|unique:users',
-            'password'=>'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -88,12 +102,19 @@ class HomeController extends Controller
 
         User::create([
             'name' => $request->name,
-            'email'=>$request->email,
-            'role_id'=>$request->role,
-            'role_name'=>'sub',
-            'password'=>Hash::make($request->password),
+            'email' => $request->email,
+            'role_id' => $request->role,
+            'role_name' => 'sub',
+            'password' => Hash::make($request->password),
         ]);
         Toastr::success('Data created successful');
         return redirect()->back();
+    }
+
+    public function student()
+    {
+        $data['item'] = Student::get();
+        $pdf = PDF::loadView('frontend.invoice', $data);
+        return $pdf->stream('invoice.pdf');
     }
 }
