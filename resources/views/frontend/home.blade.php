@@ -24,7 +24,7 @@
                     <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis
                         aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi
                         vero voluptate voluptatibus possimus, veniam magni quis!</p>
-                    <a class="btn btn-primary" target="_blank" href="{{route('student')}}">pdf →</a>
+                        <a class="btn btn-primary" href="#!">Read more →</a>
                 </div>
             </div>
             <!-- Nested row for non-featured blog posts-->

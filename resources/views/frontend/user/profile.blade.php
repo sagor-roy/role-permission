@@ -6,21 +6,16 @@
     <div class="row">
         <div class="col-md-8">
             <div class="card card-body">
-                <table>
+                <table id="data-table" class="table table-bordered table-striped">
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th>Category</th>
-                            <th>Title</th>
-                            <th>Description</th>
-                            <th>Image</th>
-                            <th>Action</th>
+                            <th>Name</th>
+                            <th>Subject</th>
+                            <th>Roll</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>01</td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -31,10 +26,10 @@
                     <h4 class="card-title">Profile</h4>
                 </div>
                 <div class="card-body">
-                   <ul>
-                       <li>Name : {{Auth::user()->name}}</li>
-                       <li>Email : {{Auth::user()->email}}</li>
-                   </ul>
+                    <ul>
+                        <li>Name : {{Auth::user()->name}}</li>
+                        <li>Email : {{Auth::user()->email}}</li>
+                    </ul>
                 </div>
             </div>
         </div>

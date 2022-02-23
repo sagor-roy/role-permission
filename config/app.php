@@ -167,6 +167,7 @@ return [
          */
         Brian2694\Toastr\ToastrServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,
         /*
          * Application Service Providers...
          */

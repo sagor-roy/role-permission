@@ -4,14 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Creadential;
 use App\Models\Role;
-use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Hash;
-use Barryvdh\DomPDF\Facade\Pdf;
+use DataTables;
 
 class HomeController extends Controller
 {
@@ -111,10 +110,4 @@ class HomeController extends Controller
         return redirect()->back();
     }
 
-    public function student()
-    {
-        $data['item'] = Student::get();
-        $pdf = PDF::loadView('frontend.invoice', $data);
-        return $pdf->stream('invoice.pdf');
-    }
 }

@@ -5,7 +5,6 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/student', [HomeController::class, 'student'])->name('student');
 Route::middleware('isLoggedIn')->group(function () {
     Route::get('/login', [HomeController::class, 'loginIndex'])->name('index.login');
     Route::get('/auth/google', [AuthController::class, 'redirectToGoogle'])->name('login.google');
@@ -20,6 +19,7 @@ Route::middleware('isLoggedIn')->group(function () {
 });
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [HomeController::class, 'profile'])->name('profile');
+    Route::get('/student-data', [HomeController::class, 'studentData'])->name('student.data');
     Route::middleware('IsCustomer')->group(function () {
         Route::get('admin/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
         Route::prefix('admin')->name('admin.')->group(function () {
